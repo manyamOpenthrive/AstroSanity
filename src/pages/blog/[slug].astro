@@ -1,0 +1,47 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  getBlogPostBySlug,
+  getAllBlogSlugs,
+  urlForImage,
+} from "../../lib/sanity";
+import PortableTextInternal from "../../components/PortableText.astro";
+const { slug } = Astro.params;
+
+const post = await getBlogPostBySlug(slug);
+
+export async function getStaticPaths() {
+  const slugs = await getAllBlogSlugs();
+
+  return slugs.map((slug) => ({
+    params: { slug },
+    props: {},
+  }));
+}
+---
+
+<Layout title={post.title}>
+  <main class="mt-8">
+    <h1>
+      <span
+        class="mt-2 mb-3 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl"
+        >{post.title}</span
+      >
+    </h1>
+    <div class="flex justify-center">
+      {
+        post.titleImage && (
+          <img
+            width={1000}
+            src={urlForImage(post.titleImage).url()}
+            alt={post.title}
+          />
+        )
+      }
+    </div>
+
+    <article class="mt-16 prose-blue prose-lg">
+      <PortableTextInternal portableText={post.content} />
+    </article>
+  </main>
+</Layout>

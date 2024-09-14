@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { getFirstBlogPost, urlForImage } from "../lib/sanity";
+
+const blogPosts = await getFirstBlogPost();
+---
+
+<Layout title="Blog Posts">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 gap-5">
+    {
+      blogPosts.length > 0 ? (
+        blogPosts.map((post) => (
+          <Card
+            title={post.title}
+            smallDescription={post.smallDescription}
+            href={post.currentSlug}
+            imageSrc={urlForImage(post.titleImage).width(400).url()}
+          />
+        ))
+      ) : (
+        <p>No blog posts available.</p>
+      )
+    }
+  </div>
+</Layout>
