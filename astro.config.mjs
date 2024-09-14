@@ -9,7 +9,7 @@ export default defineConfig({
         projectId: "gpv58soz",
         dataset: "production",
         apiVersion: 'v2022-03-07',
-        useCdn: false,
+        useCdn: true,
         studioBasePath: '/studio' // If you want to access the Studio on a route
     }), tailwind()]
 });
