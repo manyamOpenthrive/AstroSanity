@@ -10,5 +10,6 @@ export default defineConfig({
         dataset: "production",
         apiVersion: 'v2022-03-07',
         useCdn: false,
+        studioBasePath: '/studio' // If you want to access the Studio on a route
     }), tailwind()]
 });
