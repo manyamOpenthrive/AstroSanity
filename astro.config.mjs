@@ -9,6 +9,6 @@ export default defineConfig({
         projectId: "gpv58soz",
         dataset: "production",
         apiVersion: 'v2022-03-07',
-        useCdn: true,
+        useCdn: false,
     }), tailwind()]
 });
